@@ -2,28 +2,35 @@
 
 Aplicación web fullstack para gestión de turnos médicos, peluquerías y entrenadores personales.
 
-## Tecnologías
+![Demo del proyecto](assets/demo.gif)
 
-- **Frontend:** React, Vite, React Router, Axios, FullCalendar
-- **Backend:** Node.js, Express, JWT, bcrypt
-- **Base de datos:** PostgreSQL, Sequelize ORM
+## 🔗 Demo en vivo
 
-## Funcionalidades
+[Ver aplicación](https://sistema-turnos-fullstack.vercel.app/login)
+
+## 🛠 Tecnologías
+
+**Frontend:** React, Vite, React Router, Axios, FullCalendar  
+**Backend:** Node.js, Express, JWT, bcrypt  
+**Base de datos:** PostgreSQL, Sequelize ORM  
+**Deploy:** Vercel (frontend) + Railway (backend)
+
+## ✨ Funcionalidades
 
 - Registro e inicio de sesión con autenticación JWT
 - Contraseñas encriptadas con bcrypt
 - Crear, modificar y cancelar turnos
-- Vista de calendario mensual
-- Rutas protegidas por rol (admin / cliente)
-- Arquitectura REST API
+- Vista de calendario mensual interactivo
+- Rutas protegidas por middleware
+- Cada usuario ve únicamente sus propios turnos
+- Diseño responsive para mobile y desktop
 
-## Instalación local
+## 🚀 Instalación local
 
 ### Backend
 ```bash
 cd server
 npm install
-# Crear archivo .env con las variables de entorno
 npm run dev
 ```
 
@@ -34,7 +41,7 @@ npm install
 npm run dev
 ```
 
-### Variables de entorno necesarias en `server/.env`
+### Variables de entorno — `server/.env`
 ```
 PORT=3000
 JWT_SECRET=tu_clave_secreta
