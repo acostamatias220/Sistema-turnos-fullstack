@@ -33,32 +33,33 @@ function Dashboard() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#f0f2f5', padding: '20px' }}>
-      <div style={{ maxWidth: '700px', margin: '0 auto' }}>
+    <div>
+      <header className='header'>
+        <div>
+          <h1>TurnosApp</h1>
+          <span>Bienvenido, {usuario?.nombre}</span>
+        </div>
+        <button className='btn-logout' onClick={handleLogout}>
+          Cerrar sesión
+        </button>
+      </header>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-          <div>
-            <h1 style={{ fontSize: '22px', color: '#1a1a2e' }}>Mis turnos</h1>
-            <p style={{ color: '#888', fontSize: '14px' }}>Bienvenido, {usuario?.nombre}</p>
+      <div className='dashboard-body'>
+        <div className='dashboard-grid'>
+          <div className='dashboard-card'>
+            <FormularioTurno onTurnoCreado={cargarTurnos} />
           </div>
-          <button
-            onClick={handleLogout}
-            style={{ width: 'auto', padding: '10px 20px', backgroundColor: '#e53e3e' }}
-          >
-            Cerrar sesión
-          </button>
+          <div className='dashboard-card'>
+            <Calendario turnos={turnos} />
+          </div>
         </div>
 
-        <FormularioTurno onTurnoCreado={cargarTurnos} />
-
-        <Calendario turnos={turnos} />
-
-
-        {cargando
-          ? <p style={{ textAlign: 'center', color: '#888' }}>Cargando turnos...</p>
-          : <ListaTurnos turnos={turnos} onTurnoActualizado={cargarTurnos} />
-        }
-
+        <div className='dashboard-card'>
+          {cargando
+            ? <p style={{ textAlign: 'center', color: '#888' }}>Cargando turnos...</p>
+            : <ListaTurnos turnos={turnos} onTurnoActualizado={cargarTurnos} />
+          }
+        </div>
       </div>
     </div>
   )

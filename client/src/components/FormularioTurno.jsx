@@ -31,8 +31,7 @@ function FormularioTurno({ onTurnoCreado }) {
   }
 
   return (
-    <div className='card' style={{ marginBottom: '24px' }}>
-      <h2>Reservar turno</h2>
+    
       <form onSubmit={handleSubmit}>
         <div className='campo'>
           <label>Servicio</label>
@@ -80,7 +79,6 @@ function FormularioTurno({ onTurnoCreado }) {
           {cargando ? 'Reservando...' : 'Reservar turno'}
         </button>
       </form>
-    </div>
   )
 }
 
