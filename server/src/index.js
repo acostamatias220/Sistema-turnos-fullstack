@@ -9,7 +9,13 @@ const appointmentRoutes = require('./routes/appointmentRoutes')
 const app = express()
 const PORT = process.env.PORT || 3000
 
-app.use(cors())
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://sistema-turnos-fullstack.vercel.app/register'
+  ],
+  credentials: true
+}))
 app.use(express.json())
 app.use('/api/auth', authRoutes)
 app.use('/api/appointments', appointmentRoutes)
