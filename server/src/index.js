@@ -10,10 +10,13 @@ const app = express()
 const PORT = process.env.PORT || 3000
 
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'https://sistema-turnos-fullstack.vercel.app'
-  ],
+  origin: (origin, callback) => {
+    if (!origin || origin.includes('vercel.app') || origin.includes('localhost')) {
+      callback(null, true)
+    } else {
+      callback(new Error('No permitido por CORS'))
+    }
+  },
   credentials: true
 }))
 app.use(express.json())
