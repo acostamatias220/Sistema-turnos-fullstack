@@ -5,12 +5,23 @@ const crearTurno = async (req, res) => {
   try {
     const { fecha, hora, servicio, notas } = req.body
 
+    // Verificar si ya existe un turno en esa fecha y hora
+    const turnoExistente = await Appointment.findOne({
+      where: { fecha, hora }
+    })
+
+    if (turnoExistente) {
+      return res.status(400).json({
+        error: 'Ya existe un turno reservado en esa fecha y horario'
+      })
+    }
+
     const turno = await Appointment.create({
       fecha,
       hora,
       servicio,
       notas,
-      userId: req.usuario.id // viene del token JWT
+      userId: req.usuario.id
     })
 
     res.status(201).json({
@@ -65,6 +76,19 @@ const modificarTurno = async (req, res) => {
 
     if (!turno) {
       return res.status(404).json({ error: 'Turno no encontrado' })
+    }
+
+    // Verificar superposición solo si cambió la fecha o la hora
+    if (fecha !== turno.fecha || hora !== turno.hora) {
+      const turnoExistente = await Appointment.findOne({
+        where: { fecha, hora }
+      })
+
+      if (turnoExistente) {
+        return res.status(400).json({
+          error: 'Ya existe un turno reservado en esa fecha y horario'
+        })
+      }
     }
 
     await turno.update({ fecha, hora, servicio, notas, estado })
